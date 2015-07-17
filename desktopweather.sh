@@ -2,13 +2,31 @@
 
 EARTH_HOME=$HOME/opt/desktopweather
 
-#IMG_URL=http://www.opentopia.com/images/cams/world_sunlight_map_rectangular.jpg
-#IMG_URL=http://www.ssec.wisc.edu/data/us_comp/image7.jpg
-#IMG_URL=http://www.ssec.wisc.edu/data/us_comp/big/image24.jpg
-#IMG_URL=http://www.nnvl.noaa.gov/images/FDCweb.png
+## Image URLs
+URL_CONUS=http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
+URL_EAST=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
+URL_WEST=http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
+URL_GLOBAL=http://www.opentopia.com/images/data/sunlight/world_sunlight_map_rectangular.jpg
+
 IMG_URL=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
 
 REFRESH=15m
+
+options()
+{
+}
+
+getImage()
+{
+}
+
+setImage()
+{
+}
+
+buildMovie()
+{
+}
 
 cd $EARTH_HOME
 while [  1 ]; do
