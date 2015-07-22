@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERBOSE=0
+
 EARTH_HOME=$HOME/opt/desktopweather
 
 ## Image URLs
@@ -14,18 +16,26 @@ REFRESH=15m
 
 options()
 {
+  # parse options: image, refresh,etc
+  if [ VERBOSE ]; then echo "parsing options"; fi
 }
 
 getImage()
 {
+  # retrieve configured image
+  if [ VERBOSE ]; then echo "retrieving image from: "$IMG_URL; fi
 }
 
 setImage()
 {
+  # set desktop wallpaper
+  if [ VERBOSE ]; then echo "setting wallpaper"; fi
 }
 
 buildMovie()
 {
+  # build movie
+  if [ VERBOSE ]; then echo "generating animated gif"; fi
 }
 
 cd $EARTH_HOME
