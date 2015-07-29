@@ -29,13 +29,18 @@ HELP()
   echo -e \\n"Help documentation for ${BOLD}${WEATHER_SCRIPT}.${NORM}"\\n
   echo -e "${REV}Basic usage:${NORM} ${BOLD}$WEATHER_SCRIPT ${NORM}"\\n
   echo "Command line switches are optional. The following switches are recognized."
-  echo "${REV}-i${NORM}  --Set image url. Options: [EAST, WEST, CONUS, GLOBAL]. Default is ${BOLD}EAST${NORM}."
+  echo "${REV}-i${NORM}  --Set image url. Options: [EAST, WEST, CONUS] (see below). Default is ${BOLD}EAST${NORM}."
   echo "${REV}-r${NORM}  --Set refresh rate value. Default is ${BOLD}15m${NORM}."
   echo "${REV}-o${NORM}  --Overide default log location."
   echo "${REV}-d${NORM}  --Run as daemon. Default is ${BOLD}false${NORM}."
   echo "${REV}-k${NORM}  --Kill any existing processes of this script."
   echo "${REV}-v${NORM}  --Verbose mode. Default is ${BOLD}false${NORM}."
   echo -e "${REV}-h${NORM}  --Displays this help message. No further functions are performed."\\n
+  echo "image url options:"
+  echo "    EAST: $URL_EAST"
+  echo "    WEST: $URL_WEST"
+  echo "   CONUS: $URL_CONUS"
+#  echo "  GLOBAL: $URL_GLOBAL"
   exit 1
 
 }
