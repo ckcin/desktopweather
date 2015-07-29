@@ -14,11 +14,7 @@ IMG_URL=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest
 
 REFRESH=15m
 
-options()
-{
-  # parse options: image, refresh,etc
-  if [ VERBOSE ]; then echo "parsing options"; fi
-}
+DAEMON=0
 
 getImage()
 {
@@ -38,6 +34,21 @@ buildMovie()
   if [ VERBOSE ]; then echo "generating animated gif"; fi
 }
 
+run()
+{
+  echo "I'm running"
+}
+
+loop()
+{
+  while [ 1 ]; do
+    run
+    sleep $REFRESH
+  done
+}
+
+old()
+{
 cd $EARTH_HOME
 while [  1 ]; do
   COUNTER=0
@@ -68,3 +79,53 @@ while [  1 ]; do
 # xfdesktop --reload
   sleep $REFRESH
 done
+}
+
+#--MAIN--#
+while getopts ":li:r:dk" opt; do
+  case $opt in
+    l)
+      old
+      ;;
+    i)
+      case $OPTARG in
+        EAST)
+          IMG_URL=$URL_EAST
+          ;;
+        WEST)
+          IMG_URL=$URL_WEST
+          ;;
+        CONUS)
+          IMG_URL=$URL_CONUS
+          ;;
+        GLOBAL)
+          IMG_URL=$URL_GLOBAL
+          ;;
+      esac
+      ;;
+    r)
+      REFRESH_RATE=$OPTARG
+      ;;
+    d)
+      DAEMON=1
+      echo "Running in daemon mode"
+      ;;
+    k)
+      killall desktopweather.sh sleep
+      ;;
+    :)
+      echo "Options -$OPTARG "
+      exit 1
+      ;;
+  esac
+done
+
+cd $EARTH_HOME
+if [ DAEMON ]; then
+#  loop </dev/null >/dev/null 2>&1 &
+  loop <$EARTH_HOME/desktopweather.log >$EARTH_HOME/desktopweather.log 2>&1 &
+  disown
+else
+  run
+fi
+
