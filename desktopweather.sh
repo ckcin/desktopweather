@@ -7,6 +7,7 @@ MOVIE=0
 WEATHER_HOME=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) 
 WEATHER_SCRIPT=$(basename ${BASH_SOURCE[0]})
 WEATHER_LOG=$WEATHER_HOME/$WEATHER_SCRIPT.log
+WEATHER_HISTORY=$WEATHER_HOME/history
 
 ## Image URLs
 URL_CONUS=http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
@@ -25,7 +26,7 @@ REV=`tput smso`
 
 HELP()
 {
-#while getopts "li:r:dkvo:" opt; do
+#while getopts "li:r:dkRvo:" opt; do
   echo -e \\n"Help documentation for ${BOLD}${WEATHER_SCRIPT}.${NORM}"\\n
   echo -e "${REV}Basic usage:${NORM} ${BOLD}$WEATHER_SCRIPT ${NORM}"\\n
   echo "Command line switches are optional. The following switches are recognized."
@@ -34,6 +35,7 @@ HELP()
   echo "${REV}-o${NORM}  --Overide default log location."
   echo "${REV}-d${NORM}  --Run as daemon. Default is ${BOLD}false${NORM}."
   echo "${REV}-k${NORM}  --Kill any existing processes of this script."
+  echo "${REV}-R${NORM}  --RESET history location"
   echo "${REV}-v${NORM}  --Verbose mode. Default is ${BOLD}false${NORM}."
   echo -e "${REV}-h${NORM}  --Displays this help message. No further functions are performed."\\n
   echo "image url options:"
@@ -61,12 +63,12 @@ getImage()
     diff_check=`diff -q .tmp_weather.jpg wallpaper.jpg`
     if [[ $diff_check != '' ]]; then
       mv .tmp_weather.jpg wallpaper.jpg
-      mogrify -resize 1440x900 wallpaper.jpg
+#      mogrify -resize 1440x900 wallpaper.jpg
   
-      # archive 24hrs
+      # archive images for 'movie'
       DATE=`date +%Y%m%d%H%M`
-      cp wallpaper.jpg $WEATHER_HOME/weather_history/${DATE}.jpg
-      find $WEATHER_HOME/weather_history/ -mmin +360 -exec rm {} \;
+      cp wallpaper.jpg $WEATHER_HISTORY/${DATE}.jpg
+      find $WEATHER_HISTORY/ -mmin +360 -exec rm {} \;
 
       break
     fi
@@ -89,7 +91,7 @@ buildMovie()
   # build movie
   if [ $VERBOSE -ne 0 ]; then echo "generating animated gif"; fi
   #convert -delay 10 -loop 0 $WEATHER_HOME/weather_history/*.jpg weather.gif
-  ffmpeg -i $WEATHER_HOME/weather_history/*.jpg -y weather.mp4
+  ffmpeg -framerate 1/5 -i $WEATHER_HISTORY/*.jpg -y weather.mp4
 }
 
 run()
@@ -143,7 +145,7 @@ done
 }
 
 #--MAIN--#
-while getopts ":i:r:mdkvo:ihl" opt; do
+while getopts ":i:r:mdkRvo:ihl" opt; do
   if [ $VERBOSE -ne 0 ]; then echo "processing opt: "$opt; fi
   case $opt in
     i)
@@ -173,6 +175,11 @@ while getopts ":i:r:mdkvo:ihl" opt; do
       ;;
     k)
       killall desktopweather.sh sleep
+      exit
+      ;;
+    R)
+      rm -rf $WEATHER_HISTORY/*
+      exit
       ;;
     v)
       VERBOSE=$((VERBOSE+1))
