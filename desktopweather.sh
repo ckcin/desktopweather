@@ -91,7 +91,7 @@ buildMovie()
   # build movie
   if [ $VERBOSE -ne 0 ]; then echo "generating animated gif"; fi
   #convert -delay 10 -loop 0 $WEATHER_HOME/weather_history/*.jpg weather.gif
-  ffmpeg -framerate 1/5 -i $WEATHER_HISTORY/*.jpg -y weather.mp4
+  ffmpeg -f image2 -framerate 1/5 -pattern_type glob -i '$WEATHER_HISTORY/*.jpg' -c:v libx264 -y weather.mp4
 }
 
 run()
@@ -168,7 +168,7 @@ while getopts ":i:r:mdkRvo:ihl" opt; do
       REFRESH_RATE=$OPTARG
       ;;
     m)
-      MOVIE=1
+      MOVIE=0 #1 --DISABLED WHILE LOOKING FOR OPTIMAL SOLUTION
       ;;
     d)
       DAEMON=1
