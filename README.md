@@ -19,8 +19,8 @@ Command line switches are optional. The following switches are recognized.
 
 image url options:
 
-    EAST: http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
-    WEST: http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
-    CONUS: http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
+    EAST: (http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg)
+    WEST: (http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg)
+    CONUS: (http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG)
 
 
