@@ -15,7 +15,8 @@ URL_EAST=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/lates
 URL_WEST=http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
 URL_GLOBAL=http://www.opentopia.com/images/data/sunlight/world_sunlight_map_rectangular.jpg
 
-IMG_URL=$URL_EAST
+# set default
+IMG_URL=$URL_CONUE
 
 REFRESH=15m
 
@@ -30,7 +31,7 @@ HELP()
   echo -e \\n"Help documentation for ${BOLD}${WEATHER_SCRIPT}.${NORM}"\\n
   echo -e "${REV}Basic usage:${NORM} ${BOLD}$WEATHER_SCRIPT ${NORM}"\\n
   echo "Command line switches are optional. The following switches are recognized."
-  echo "${REV}-i${NORM}  --Set image url. Options: [EAST, WEST, CONUS] (see below). Default is ${BOLD}EAST${NORM}."
+  echo "${REV}-i${NORM}  --Set image url. Options: [EAST, WEST, CONUS] (see below). Default is ${BOLD}CONUS${NORM}."
   echo "${REV}-r${NORM}  --Set refresh rate value. Default is ${BOLD}15m${NORM}."
   echo "${REV}-o${NORM}  --Overide default log location."
   echo "${REV}-d${NORM}  --Run as daemon. Default is ${BOLD}false${NORM}."
