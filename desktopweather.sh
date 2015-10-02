@@ -12,6 +12,7 @@ WEATHER_HISTORY=$WEATHER_HOME/history
 ## Image URLs
 URL_CONUS=http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
 URL_EAST=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
+URL_ALTEAST=http://www.nnvl.noaa.gov/images/ATLANTICCOLOR.JPG
 URL_WEST=http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
 URL_GLOBAL=http://www.opentopia.com/images/data/sunlight/world_sunlight_map_rectangular.jpg
 
@@ -119,6 +120,9 @@ while getopts ":i:r:mdkRvo:ihl" opt; do
       case $OPTARG in
         EAST)
           IMG_URL=$URL_EAST
+          ;;
+        ALTEAST)
+          IMG_URL=$URL_ALTEAST
           ;;
         WEST)
           IMG_URL=$URL_WEST
