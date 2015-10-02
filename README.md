@@ -9,7 +9,7 @@ Basic usage: desktopweather.sh
 
 Command line switches are optional. The following switches are recognized.
 
-    -i  --Set image url. Options: [EAST, WEST, CONUS]. Default is EAST.
+    -i  --Set image url. Options: [EAST, WEST, CONUS]. Default is CONUS.
     -r  --Set refresh rate value. Default is 15m.
     -o  --Overide default log location.
     -d  --Run as daemon. Default is false.
