@@ -10,7 +10,8 @@ WEATHER_LOG=$WEATHER_HOME/$WEATHER_SCRIPT.log
 WEATHER_HISTORY=$WEATHER_HOME/history
 
 ## Image URLs
-URL_CONUS=http://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
+URL_CONUS=https://www.nnvl.noaa.gov/satimg/GERVISIR.JPG
+#URL_CONUS=https://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
 URL_EAST=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
 URL_ALTEAST=http://www.nnvl.noaa.gov/images/ATLANTICCOLOR.JPG
 URL_WEST=http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
@@ -84,8 +85,14 @@ setImage()
 {
   # set desktop wallpaper
   if [ $VERBOSE -ne 0 ]; then echo "setting wallpaper"; fi
-  gconftool-2 --type=string --set /desktop/gnome/background/picture_filename $WEATHER_HOME/wallpaper.jpg
-# xfdesktop --reload
+  case $GDMSESSION in
+    "gnome")
+      #gconftool-2 --type=string --set /desktop/gnome/background/picture_filename $WEATHER_HOME/wallpaper.jpg
+      gsettings set org.gnome.desktop.background picture-uri "$WEATHER_HOME/wallpaper.jpg"
+      ;;
+    "xfce")
+      xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s $WEATHER_HOME/wallpaper.jpg
+  esac
 }
 
 buildMovie()
