@@ -12,10 +12,12 @@ WEATHER_HISTORY=$WEATHER_HOME/history
 ## Image URLs
 URL_CONUS=https://www.nnvl.noaa.gov/satimg/GERVISIR.JPG
 #URL_CONUS=https://www.nnvl.noaa.gov/images/MIDUSCOLOR.JPG
+URL_GOES16=https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/latest.jpg
 URL_EAST=http://goes.gsfc.nasa.gov/goescolor/goeseast/hurricane2/color_lrg/latest.jpg
 URL_ALTEAST=http://www.nnvl.noaa.gov/images/ATLANTICCOLOR.JPG
 URL_WEST=http://goes.gsfc.nasa.gov/goescolor/goeswest/pacific2/color_lrg/latest.jpg
-URL_GLOBAL=http://www.opentopia.com/images/data/sunlight/world_sunlight_map_rectangular.jpg
+#URL_GLOBAL=http://www.opentopia.com/images/data/sunlight/world_sunlight_map_rectangular.jpg
+URL_GLOBAL=https://static.die.net/earth/mercator/1600.jpg
 
 # set default
 IMG_URL=$URL_CONUS
@@ -140,13 +142,16 @@ while getopts ":i:r:mdkRvo:ihl" opt; do
         GLOBAL)
           IMG_URL=$URL_GLOBAL
           ;;
+        GOESR)
+          IMG_URL=$URL_GOES16
+          ;;
       esac
       ;;
     r)
       REFRESH_RATE=$OPTARG
       ;;
     m)
-      MOVIE=0 #1 --DISABLED WHILE LOOKING FOR OPTIMAL SOLUTION
+      MOVIE=1 #1 --DISABLED WHILE LOOKING FOR OPTIMAL SOLUTION
       ;;
     d)
       DAEMON=1
